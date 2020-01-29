@@ -7,30 +7,31 @@ const initialState = {
 
 const executeGetDataSuccess = (state, action) => {
     return {
-        ...state,
-        data: action.data
+        ...state, data: action.data
     }
 }
 
 const executePostDataSuccess = (state, action) => {
     return {
-        ...state,
-        showSuccessModal: true
+        ...state, showSuccessModal: true
     }
 }
 
 const executePutDataSuccess = (state, action) => {
     return {
-        ...state,
-        showSuccessModal: true
+        ...state, showSuccessModal: true
     }
 }
 
 const executeDeleteDataSuccess = (state, action) => {
     return {
-        ...state,
-        showSuccessModal: true
+        ...state, showSuccessModal: true
     }
+}
+
+const executeCloseSuccessModal = (state, action) => {
+    action.props.history.push(action.url);
+    return { ...state, showSuccessModal: false }
 }
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +44,8 @@ const reducer = (state = initialState, action) => {
             return executePutDataSuccess(state, action);
         case actionTypes.DELETE_DATA_SUCCESS:
             return executeDeleteDataSuccess(state, action);
+        case actionTypes.CLOSE_SUCCESS_MODAL:
+            return executeCloseSuccessModal(state, action);
         default:
             return state;
     }
